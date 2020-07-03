@@ -6,17 +6,17 @@ on:
       - "main"
 
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
+    container:
+      image: ministryofjustice/cloud-platform-user-guide:2.2
     steps:
     - uses: actions/checkout@v2
-
-    - name: Install middleman
-      run: gem install middleman
-
     - name: Build
       run: middleman build --build-dir docs
 
+  publish:
+    runs-on: ubuntu-latest
     - name: Release Github Pages
       uses: igolopolosov/github-action-release-github-pages@master
       env:
