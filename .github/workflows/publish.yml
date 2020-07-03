@@ -9,11 +9,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: ministryofjustice/cloud-platform-user-guide:2.2
+      image: digitalronin/ug
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: middleman build --build-dir docs
+      run: bundle exec middleman build --build-dir docs
 
   publish:
     needs: build
