@@ -1,0 +1,87 @@
+---
+title: How to use `kubectl` to connect to the cluster
+last_reviewed_on: 2020-04-28
+review_in: 3 months
+---
+
+# <%= current_page.data.title %>
+
+The aim of this guide is to help you install and configure `kubectl`, the official command-line tool for Kubernetes.
+
+`kubectl` is used to deploy and manage applications on Kubernetes and is fundamental for anyone who wants to interact with the Cloud Platform.
+
+After working through this guide you should be able to use kubectl to query and update your namespace(s) on the Cloud Platform.
+
+## Installation
+
+Please read the [official documentation][kubectl-install] on how to install `kubectl`.
+
+## Authentication
+
+After installing kubectl, you need to authenticate to the Cloud Platform.
+
+To do this, you must have a GitHub account to which your `...@digital.justice.gov.uk` email address has been added.
+
+The Cloud Platform uses GitHub for authentication and authorisation, and access to different namespaces (e.g. `pvb-production`, `cla-staging`) is granted according to GitHub team membership (e.g. 'PVB' and 'CLA' teams).
+
+Your account must be a member of the Ministry of Justice Organisation on GitHub. If you are not already in the organisation, you can add yourself (provided you have added your MoJ email address to your GitHub account) using [this link][github-sso].
+
+### How do I connect to the kubernetes cluster?
+
+We use [Auth0] to bridge between GitHub's [OAuth2], and [OIDC] authentication, which Kubernetes supports. [Kuberos] generates a config file, containing access credentials. You need to download this file and store it on your laptop, as `~/.kube/config`
+
+1. Click on [this link][cp-login]
+2. Go through the 'Sign in with GitHub' process
+
+    NB: Be careful when you reach the authorization step:
+
+    ![GitHub Authorize MoJ](/images/github-authorize-moj.png)
+
+3. Authorise 'live-1:kubernetes' to access your 'justice-cloud-platform' tenant
+4. Use the 'Download Config File' button
+5. Rename the downloaded file to `~/.kube/config`
+6. Run this command:
+
+```
+kubectl config use-context live-1.cloud-platform.service.justice.gov.uk
+```
+
+You should now be able to run `kubectl` commands. Try running `kubectl get namespaces` to list the namespaces in the cluster.
+
+#### Troubleshooting: "current" context
+
+If you see an error like this when executing `kubectl` commands:
+```
+The connection to the server localhost:8080 was refused
+```
+
+Check that your "current" context is set, by running:
+
+```
+kubectl config get-contexts
+```
+
+If the output looks like this (i.e. there is no `*` indicating that the live-1 context is set as the `current` context:
+
+```
+CURRENT   NAME                                           CLUSTER                                        AUTHINFO                 NAMESPACE
+          live-1.cloud-platform.service.justice.gov.uk   live-1.cloud-platform.service.justice.gov.uk   <your github e-mail>
+```
+
+Then you need to set the context with the `use-context` command mentioned above.
+
+## Where to go from here?
+
+Now that you've setup `kubectl`, you might want to look at this handy [cheatsheet][kubectl-cheatsheet].
+
+Once you are ready to deploy applications you will need to [create a namespace] first.
+
+[kubectl-install]: https://kubernetes.io/docs/tasks/tools/install-kubectl
+[OAuth2]: https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2
+[OIDC]: https://kubernetes.io/docs/reference/access-authn-authz/authentication/#openid-connect-tokens
+[Auth0]: https://www.auth0.com
+[Kuberos]: https://github.com/negz/kuberos
+[kubectl-cheatsheet]: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+[github-sso]: https://github.com/orgs/ministryofjustice/sso
+[cp-login]: https://login.cloud-platform.service.justice.gov.uk/
+[create a namespace]: /documentation/getting-started/env-create.html
