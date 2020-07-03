@@ -17,7 +17,7 @@ jobs:
     - name: Run the script
       run: bin/publish.sh
       env:
-        GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
+        PUBLISHING_GIT_TOKEN: ${{ secrets.PUBLISHING_GIT_TOKEN }}
         GITHUB_PAGES_REPO_AUTHOR: digitalronin
         GITHUB_PAGES_REPO_NAME: cpug-publish
         GITHUB_PAGES_RELEASE_BRANCH: gh-pages
