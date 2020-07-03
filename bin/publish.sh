@@ -10,6 +10,9 @@ cp -R docs/* $GITHUB_PAGES_REPO_NAME
 
 echo "Push the changes"
 cd $GITHUB_PAGES_REPO_NAME
+
+git config --global user.email "foo@bar.com"
+git config --global user.name "Foo Bar"
 git add .
 git commit -m "Published at $(date)"
 git push
