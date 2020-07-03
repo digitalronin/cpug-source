@@ -16,6 +16,7 @@ jobs:
       run: middleman build --build-dir docs
 
   publish:
+    needs: build
     runs-on: ubuntu-latest
     - name: Release Github Pages
       uses: igolopolosov/github-action-release-github-pages@master
