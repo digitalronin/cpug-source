@@ -1,5 +1,6 @@
 # Host to use for canonical URL generation (without trailing slash)
-host: user-guide.cloud-platform.service.justice.gov.uk
+# host: user-guide.cloud-platform.service.justice.gov.uk
+host: digitalronin.github.io/cpug-publish
 
 # Header-related options
 show_govuk_logo: false
