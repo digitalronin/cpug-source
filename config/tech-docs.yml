@@ -2,20 +2,23 @@
 host: user-guide.cloud-platform.service.justice.gov.uk
 
 # Header-related options
-show_govuk_logo: true
-service_name: My First Service
-service_link: https://www.larry-the-cat.service.gov.uk
-phase: Beta
+show_govuk_logo: false
+service_name: Cloud Platform User Guide
+service_link: /
+phase: INTERNAL
 
 # Links to show on right-hand-side of header
 header_links:
-  About: https://www.larry-the-cat.service.gov.uk
-  Get Started: https://www.larry-the-cat.service.gov.uk/get-started
+  # This mailto link must contain the text 'Feedback' in order to trigger the javascript
+  # function in source/layouts/custom.erb which adds the current window.location to the
+  # body of the resulting email message.
+  'Feedback / Report a problem': 'mailto:platforms+user-guide@digital.justice.gov.uk?subject=User+guide+feedback'
+
   Documentation: /
-  Support: https://www.larry-the-cat.service.gov.uk/support
+  GitHub: https://github.com/ministryofjustice/cloud-platform-user-guide
 
 # Enables search functionality. This indexes pages only and is not recommended for single-page sites.
-enable_search: false
+enable_search: true
 
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
 ga_tracking_id:
@@ -29,10 +32,10 @@ collapsible_nav: false
 # Table of contents depth – how many levels to include in the table of contents.
 # If your ToC is too long, reduce this number and we'll only show higher-level
 # headings.
-max_toc_heading_level: 6
+max_toc_heading_level: 3
 
 # Prevent robots from indexing (e.g. whilst in development)
-prevent_indexing: false
+prevent_indexing: true
 
 show_contribution_banner: true
-github_repo: alphagov/YOUR_REPO
+github_repo: ministryofjustice/cloud-platform-user-guide
